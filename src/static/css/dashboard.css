@@ -1,0 +1,144 @@
+.nice-select.wide {
+    border: 2px solid #878796;
+    border-radius: 7px;
+}
+.nice-select.open .list{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.user-dropdown-link {
+    font-size: 25px;
+    color: gray;
+}
+
+.multi_night_select_wrapper {
+    margin-left: 160px;
+}
+
+#multi_night_select {
+    width: 220px;
+    height: 42px;
+    border-radius: 17px;
+}
+
+.narcolepsy_night_select_wrapper {
+    margin-left: 160px;
+}
+
+#narcolepsy_night_select {
+    width: 220px;
+    height: 42px;
+    border-radius: 17px;
+}
+
+.narcolepsy-sleepiness-title {
+    display: flex;
+    justify-content: space-between;
+}
+.narcolepsy-select {
+    display: flex;
+    float: right;
+}
+
+.narcolepsy-select-item {
+    padding: 18px 16px 0 0;
+}
+
+.smaller_heigh_graph {
+    height: 300px;
+}
+
+.cr_lables {
+    font-size: 13px;
+}
+
+.cr_lables .box {
+    height: 10px;
+    width: 20px;
+    margin-right: 15px;
+}
+
+.cr_lables .smallbox {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+}
+
+.cr_lables .smallline {
+    height: 13px;
+    width: 2px;
+    background-color: #E0821D;
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+.cr_lables .awake .box {
+    background-color: #fbf8d9;
+}
+
+.cr_lables .sleep_window .box {
+    background-color: #d6e2f5;
+}
+
+.cr_lables .sleep_window .wake {
+    background-color: #2cc8c1;
+}
+
+.cr_lables .sleep_window .rem {
+    background-color: #779ede;
+}
+
+.cr_lables .sleep_window .nrem {
+    background-color: #2e3192;
+}
+
+.cr_lables .line {
+    width: 15px;
+    height: 2px;
+    margin-right: 15px;
+}
+
+.cr_lables .hr .line {
+    background-color: #f49a80;
+}
+
+.cr_lables .activity .line {
+    background-color: #5ad4cf;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex_col {
+    display: flex;
+    flex-direction: column;
+}
+
+.step_line .lines {
+    margin-right: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.step_line .hr_line {
+    width: 7px;
+    height: 2px;
+    background-color: #666666;;
+}
+
+.step_line .vr_line {
+    width: 1px;
+    height: 35px;
+    background-color: #666666;
+    margin-left: 3px;
+}
+
+.gray_text {
+    color: gray;
+}
+
+.def-toolpit-title {
+    color: green;
+}

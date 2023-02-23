@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <style>
+        .page_heading {
+            width: 100%;
+            font-size: 25px;
+            font-weight: 600;
+            color: #161e2e;
+            line-height: 4rem;
+            letter-spacing: 0.6px;
+        }
+
+        .contact_us {
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            padding: 10px;
+            border: 1px solid gray;
+            border-radius: 7px;
+        }
+    </style>
+
+{% endblock stylesheet %}
+{% block content %}
+    {% include 'header.html' %}
+    <!--end header -->
+    <div style="padding-top: 150px;" class="container-fluid ">
+        <div class="row col-lg-8 m-auto text-center">
+            <div class="page_heading">Support</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <div class="contact_us">
+                    <div class="icon">
+                        <i style="font-size: 25px;" class="fa fa-envelope"></i>
+                    </div>
+                    <div>
+                        <p>CONTACT US</p>
+                        <p>support@cerno.health</p>
+                    </div>
+                    <div>
+                        For any questions or concerns, please email us at support@cerno.health and we will get back to
+                        you.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+

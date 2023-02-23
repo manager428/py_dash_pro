@@ -1,0 +1,53 @@
+<style>
+    .nice-select .option {
+        line-height: 25px;
+        min-height: 25px;
+    }
+</style>
+<div class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="logo float-left">
+                    <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}"></a>
+                    {% if config.APP_ENV == 'dev' %}
+                        <div class="app_env">Dev</div>
+                    {% endif %}
+                </div>
+                {% if searchForm %}
+                    <div class="search-item">
+                        <select class='wide' style="width: 100%;" id="patient_select">
+                            <option id='0' value="0">Select Patient</option>
+                        </select>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="mobile-menu">
+                    <div class="menu-mob-click arrow" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="username float-right">
+                    <div class="col-md pl-4 user-dropdown text-center">
+                        <div class="dropdown btn-group">
+                            <a class="navbar-brand user-dropdown-link" href="#" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
+                            <div class="dropdown-menu user_drop_down_menu text-center">
+                                {% if current_user.is_authenticated %}
+                                    <p>{{ current_user.username }}</p>
+                                    {% if session['group'] == 'admin' %}
+                                        <a href="{{ url_for('admin_view') }}">Admin Portal</a>
+                                    {% endif %}
+                                    <a href="{{ url_for('pre_val') }}">Pre Val</a>
+                                    <a href="{{ url_for('logout') }}">Logout</a>
+                                {% else %}
+                                    <a href="{{ url_for('login') }}">Login</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

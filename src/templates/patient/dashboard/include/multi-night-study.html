@@ -1,0 +1,222 @@
+<div class="tab-pane fade" id="nav-multi-night" role="tabpanel"
+     aria-labelledby="nav-multi-night-tab">
+    <div style="display: none;" class="lds-facebook m_loading">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="row">
+        <div style="display: none;"
+             class="col-md-7  m-auto text-center m_err_block m_err_patient_data">
+            <div class="alert alert-danger" role="alert">
+                Error while fetching multi night patient data !
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="select-date-wrapper">
+                <label>Select Device :</label>
+                <select id="m_device_select">
+                    <option id='0' value="0">Select Device</option>
+                    <option id='1' value="a">Apple</option>
+                    <option id='2' value="f">Fitbit</option>
+                </select>
+            </div>
+        </div>
+        <div class=" col-md-6 select-date-wrapper">
+            <label>Select a date range :</label>
+            <!-- <select id="multi_night_select">
+
+            </select> -->
+            <div class="multi_night_select_wrapper">
+                <input class="form-control" type="text" autocomplete="off"
+                       id="multi_night_select">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row p-5 multi_recording_details">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <img id="multi_recording_device_image"
+                         src="{{ url_for('static', filename='images/watch.png') }}">
+                </div>
+                <div class="col-md-6">
+                    <div class="item-list">
+                        <span class="details_heading">Recording device:</span>
+                        <p id="multi_night_recording_device"></p>
+                    </div>
+                    <div class="item-list">
+                        <span class="details_heading">Quality:</span>
+                        <p id="m_recording_quality"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="item-list">
+                        <span class="details_heading">Start:</span>
+                        <p id="multi_night_recording_start_date"></p>
+                    </div>
+                    <div class="item-list">
+                        <span class="details_heading">End:</span>
+                        <p id="multi_night_recording_end_date"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="patient_multi_night_result">
+
+        <div class="row col-md-12">
+            <div class="col-lg-12 col-md-12  col-sm-12 table-responsive">
+                <div class="col-md-12">
+                    <h3 class=" mt-3 mb-3 ">Summary of Multi Night Study</h3>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Min</th>
+                        <th scope="col">Max</th>
+                        <th scope="col">Avg</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="multi_summary_table">
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row graph-section">
+
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <div class="card-ghraph">
+                        <h3 class="mt-3"> Circadian Rhythm
+                        </h3>
+                        <div class=" row cr_lables">
+                            <div class="col-md-3 awake">
+                                <div class="flex_row">
+                                    <div class="box"></div>
+                                    <div class="text">Awake time</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 flex_col sleep_window">
+                                <div class="flex_row">
+                                    <div class="box"></div>
+                                    <div class="text">Sleep Window</div>
+                                </div>
+                                <div class="flex_col ml-4">
+                                    <div class="flex_row">
+                                        <div class="smallline awakening"></div>
+                                        <div class="text">Awakening</div>
+                                    </div>
+                                    <div class="flex_row">
+                                        <div class="smallbox wake"></div>
+                                        <div class="text">Wake</div>
+                                    </div>
+                                    <div class="flex_row">
+                                        <div class="smallbox rem"></div>
+                                        <div class="text">REM</div>
+                                    </div>
+                                    <div class="flex_row">
+                                        <div class="smallbox nrem"></div>
+                                        <div class="text">NREM</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3 flex_col hr">
+                                <div class="flex_row">
+                                    <div class="line"></div>
+                                    <div class="text">Heart Rate</div>
+                                </div>
+
+                                <div class="flex_row gray_text step_line mt-1">
+                                    <div class="flex_col lines">
+                                        <div class="hr_line"></div>
+                                        <div class="vr_line"></div>
+                                        <div class="hr_line"></div>
+                                    </div>
+                                    <div class="flex_col">
+                                        <div class="mb-2">280 bpm</div>
+                                        <div>30 bpm</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3 flex_col activity">
+                                <div class="flex_row">
+                                    <div class="line"></div>
+                                    <div class="text">Activity</div>
+                                </div>
+                                <div class="flex_row gray_text step_line mt-1">
+                                    <div class="flex_col lines">
+                                        <div class="hr_line"></div>
+                                        <div class="vr_line"></div>
+                                        <div class="hr_line"></div>
+                                    </div>
+                                    <div class="flex_col">
+                                        <div class="mb-2">1500 counts</div>
+                                        <div>0 counts</div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="graph_area" id="multi_night_circadian_rhythms"></div>
+                    </div>
+                </div>
+            </div>
+        </div>    <!--end graph-section -->
+        <div class="row graph-section">
+
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <div class="col-md-12">
+                        <h2 class="heading mt-3">STATISTICS</h2>
+                    </div>
+                    <div class="col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="sleep_trends"></div>
+                    </div>
+                    <div class="col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="multi_night_rem_nrem_sleep_tst"></div>
+                    </div>
+                    <div class="col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="multi_night_sleep_efficency"></div>
+                    </div>
+
+                    <div class="col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="multi_night_tib_tst"></div>
+                    </div>
+                    <!-- <div class=" col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="multi_night_tst"></div>
+                    </div>	 -->
+                    <div class="col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="multi_night_aweking"></div>
+                    </div>
+
+
+                    <div class="col-md-12 card-ghraph text-center">
+                        <div class="graph_area" id="hear_rate_avg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>    <!--end graph-section -->
+    </div>
+</div>

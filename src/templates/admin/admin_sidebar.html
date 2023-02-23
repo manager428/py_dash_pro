@@ -1,0 +1,52 @@
+<style type="text/css">
+.nav-sidebar { 
+    width: 100%;
+    height: 100vh;
+    padding: 8px;
+    border-right: 1px solid #bbb7b7;
+}
+.side_bar_menu{
+	flex-direction: column;
+	margin-left: 15px;
+    margin-top: 35px;
+}
+
+.side_bar_menu li{
+	padding: 10px;
+    font-size: 18px;
+}
+.side_bar_menu .active{
+    background: #e4e3e3;
+    border-radius: 11px;
+}
+.side_bar_menu .menu_icons{
+    margin-right: 7px;
+    font-size: 17px;
+}
+.nav-sidebar a {
+    color: #333;
+    text-decoration: none;
+}
+.side_bar_menu li a.active {
+    border-bottom: 2px solid rgb(73 154 241 / 50%);
+}
+
+
+</style>
+<div class="nav-sidebar">
+<div class="user-profile">
+            <span  class="profileimg">
+                <span id="patient_f_name">{{ current_user.username[0:1] }}</span>
+            </span>
+            <label id="" class="text-center">{{ current_user.username }}</label>
+</div>
+<nav >
+    <ul class="nav side_bar_menu">
+        <li id='users'> <a href="{{ url_for('admin_view') }}"> <i class="menu_icons fa fa-users"></i> Users</a></li>
+        <li id='add_users'> <a href="{{ url_for('admin_add_user') }}"> <i class="menu_icons fa fa-user-plus"></i> Add User</a></li>
+        <li id='s3_files'> <a href="{{ url_for('admin_s3_files') }}"> <i class="menu_icons fa fa-amazon"></i> S3 Files</a></li>
+        <li class="nav-divider"></li>
+    </ul>
+</nav>
+
+</div>

@@ -1,0 +1,621 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body{
+    font-family: "Roboto","Times New Roman", "Times", "serif";
+}
+
+body {
+    background: #F0F0F0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /*background: #f1f1f1; */
+    background-color: transparent;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+
+.family-history {cursor: pointer;}
+.sleep-hitory  {cursor: pointer;}
+.spacific-quations {cursor: pointer;}
+
+.header {
+    background: #fff;
+    width: 100%;
+    display: table;
+    padding: 8px 8px;
+    box-shadow: 0px 0px 12px #000;
+    z-index: 9;
+    position: fixed;
+}
+.header .col-md-6:first-child {
+    display: flex;
+}
+.logo {
+    padding: 16px 0px;
+    display: inline-block;
+}
+.search-item {
+    padding: 8px 0px;
+    padding: 15px 5px;
+    width: 100%;
+    margin-left: 30px;
+}
+.search-item input[type="search"] {
+    width: 100%;
+    background: #F0F0F0;
+    border: none;
+    border-radius: 30px;
+    padding: 9px 23px 9px 50px;
+    outline: none;    
+    height: 50px;
+
+}
+.search-item form {
+    position: relative;
+}
+.search-item form i {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    color: #64676B;
+    font-size: 20px;
+}
+.username .profile span.name-item {
+    font-size: 18px;
+    color: #828282;
+    font-weight: 600;
+    vertical-align: middle;
+    float: left;
+    margin-top: 13px;
+}
+.username .profile span.img-profile {
+    width: 57px;
+    height: 57px;
+    display: block;
+    float: left;
+    background: #C4C4C4;
+    border-radius: 100%;
+    margin-left: 15px;
+}
+.username {
+    margin-top: 5px;
+}
+.main-container {
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+.vertical-menu {
+    background: #e8ecf7;
+    bottom: 0;
+    margin-top: 0;
+    position: relative;
+    top: 107px;
+    box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);
+    z-index: 0;
+    border: 1px solid #e8ecf7;
+    border-radius: 10px;
+    padding: 15px;
+    position: fixed;
+    width: 287px;
+    padding-top: 8px;
+    height: 100%;
+    overflow-y: scroll;
+    border-radius: 12px;
+    border: 1px solid #c9c3c3;
+}
+.user-profile label {
+    font-weight: 600;
+    display: block;
+    padding: 8px 0px;
+}
+.user-profile span.profileimg {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    background: #c4c4c438;
+    display: block;
+    border-radius: 100%;
+    text-align: center;
+    color: #4c4949;
+}
+.user-profile span#patient_f_name {
+    font-size: 45px;
+    text-transform: uppercase;
+}
+.user-profile ul, .daily-habits ul, .sleep-hitory ul, .spacific-quations ul {
+    margin: 0;
+    padding: 0;
+}
+.user-profile ul li, .daily-habits ul li, .sleep-hitory ul li, .spacific-quations ul li  {
+    list-style: none;
+    display: block;
+    position: relative;
+    padding-bottom: 5px;
+}
+.user-profile ul li span, .daily-habits ul li span, .sleep-hitory ul li span, .spacific-quations ul li span{
+    color: #585858;
+    font-size: 15px;
+    left: 0;
+    font-weight: 600;
+}
+divider {
+    height: 0.01rem;
+    background: #585858;
+    width: 100%;
+    margin: 20px 0px;
+    display: block;
+}
+.title-main {
+    font-size: 16px;
+    color: #828282;
+    font-weight: 400;
+}
+button.btn.fancy-btn {
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    border: 2px solid #42424B;
+}
+.back-bg {
+    background: #42424B;
+}
+button.btn.fancy-btn.border-black {
+    border: 2px solid #42424B;
+}
+button.btn.fancy-btn.text-black {
+    color: #42424B;
+}
+.family-history, .daily-habits, .sleep-hitory, .spacific-quations {
+    position: relative;
+}
+.spacific-quations i, .family-history i, .sleep-hitory i {
+    position: absolute;
+    top: -12px;
+    right: 0;
+    font-size: 20px;
+}
+.slectbox {
+    width: 100%;
+    padding: 10px 0px;
+    display: table;
+}
+.heading {
+    color: #183F68;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    display: block;
+}
+.item-list span {
+    font-weight: 600;
+    color: #585858;
+    font-size: 16px;
+}
+.item-list {
+    padding: 8px;
+    color: #717171;
+    font-size: 18px;
+}
+
+.recording_details .item-list {
+    padding: 0; 
+}
+
+.recording_details .details_heading {
+    font-size: 15px;
+    line-height: 18px;   
+}
+
+.recording_details .calander_date{
+    text-align: center;
+    border: 1px solid #c8c2c2;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.recording_details .calander_date #recording_date{
+    font-weight: 300;
+    font-size: 34px;
+}
+
+.mobile-menu,  .mobile-menu-close {
+    display: none;
+  }
+  /*dropdown menu*/
+.select-date-wrapper {
+    padding-bottom: 10px;
+}
+.select-date-wrapper label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    float: left;
+    padding-top: 9px;
+    color: #888888;
+    font-weight: 600;
+}
+.select-date-wrapper .nice-select {
+    display: inline-block;
+    float: initial;
+    max-width: 250px;
+    border: 1px solid #888;
+    margin-left: 16px;
+    width: 200px;
+    border-radius: 17px;
+}
+.select-date-wrapper ul.list {
+    width: 100%;
+}
+/*css for tab-section*/
+
+.tab-section {
+    padding: 17px;
+}
+.tab-section #nav-tabContent {
+    /* padding: 25px; */
+    background: #fff;
+    margin-top: 20px;
+    border: 2px solid #9a999e;
+    border-radius: 8px;
+    min-height: 400px;
+}
+.tab-section .nav-item.nav-link {
+    text-align: center;
+    color: #42424B;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    border: 2px solid #42424B;
+    margin: 10px;
+    border-radius: 8px;
+}
+.tab-section .nav-item.nav-link.active {
+    color: #fff; 
+    background: #42424B;
+    box-shadow: 2px 2px 5px rgb(31 22 22 / 45%)
+}
+.tab-section .nav-tabs {
+    border-bottom: none;
+}
+.tab-section table thead tr {
+    background: #e5e5e5;
+    border: none;
+    border-top: 1px solid #fff;
+}
+.tab-section table .red {
+    color: #ce0300;
+    font-weight: 600;
+}
+.tab-section td {
+    font-size: 16px;
+    font-weight: 600;
+}
+.tab-section td span { color: #888888; }
+.tab-section .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f5f5f5;
+} 
+/*graph css*/
+.tab-section .graph-section .heading-border-top { 
+    border-top: 1px solid #828282;
+    padding-top: 15px;
+}
+
+.tab-section h3 {
+    font-size: 17px;
+    color: #424149;
+    padding-bottom: 5px;
+    font-weight: 700;
+}
+.tab-section .graph-section .card {
+    border-radius: 8px;
+}
+.tab-section .graph-section .card  span.sub {
+    color: #888888;
+    padding-left: 10px;
+}
+.tab-section .graph-section span.zoom-arrow {
+    float: right;
+}
+.tab-section .graph-section span.zoom-arrow i {
+    background: #898989;
+    padding: 7px 9px;
+    color: #fff;
+    border-radius: 8px;
+}
+.tab-section .graph-section img {
+    max-width: 100%;
+}
+.tab-section  .result-box {
+    padding-top: 10px;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    margin-top: 14px;
+    height: 80%;
+}
+.tab-section .result-box h4.red {   
+     color: #ce0300;
+}
+.tab-section .result-box h4 {
+     font-size: 22px;
+    font-weight: 700;
+}
+.tab-section span.arrow .fa {
+    font-size: 19px;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+.tab-section span.arrow .fa-arrow-down {
+    color: #ce0300;
+}
+.tab-section span.arrow .fa-arrow-up {
+    color: #2eab36;
+}
+.tab-section p {
+    color: #8a8a8a;
+    font-size: 17px;
+}
+.tab-section .green {
+    color: #2eab36;
+}
+.tab-section ul li {
+    list-style: none;
+}
+.tab-section .center {
+    padding-top: 65px;
+}
+.tab-section .statistical-comparison ul {
+    padding: 0;
+}
+.tab-section .statistical-comparison ul li span {
+    font-weight: 700;
+    color: #585858;
+}
+
+.tab-section .patinets-details ul li {
+    color: #585858;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+.tab-section .patinets-details ul li:nth-last-child(1) {
+    border-bottom: none;
+}
+.tab-section  h5 {
+    color: #585858;
+    font-size: 17px;
+}
+
+.main-content {
+    margin-left: 287px;
+        padding-top: 80px;
+}
+.page-content {
+    /*padding: 20px;*/
+    
+}
+.card-item li {
+    list-style: none;
+}
+div#vertical-menu-mob {
+    height: 85%;
+}
+
+.app_env{
+    position: absolute;
+    top: 35px;
+    left: 72px;
+    color: gray;
+}
+
+.user_drop_down_menu a{
+    display: block;
+    text-decoration-line: none;
+}
+
+
+/* Responsive */
+@media only screen and (max-width: 991px) {
+    .tab-section .result-box {
+     margin-bottom: 30px;
+    }
+     .vertical-menu{
+     width: 0%;
+    list-style: none;
+    padding: 0;
+    padding-top: 0px;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: -2px;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    padding-top: 20px;
+    text-align: center;
+    height: 100%;
+    z-index: 9999999;
+    border-bottom: 7px solid #000;
+    border-radius: 0;
+
+ }
+ .menu-wrapper {
+    padding: 25px;
+  }
+  .mobile-menu {
+    display: inline-block;
+    float: left;
+     padding-top: 24px;
+  }
+  .menu-mob-click.arrow .fa {
+    font-size: 23px;
+  }
+  .mobile-menu-close {
+    display: block;
+    padding-bottom: 9px;
+   }
+    .mobile-menu-close .fa {
+    font-size: 21px;
+   }
+   .main-content {
+       margin-left: 0px;
+       padding-top: 90px;
+   }
+   .page-content {
+    padding: 0;
+  }
+
+}    
+.question_ans_results{
+    padding-left: 0;
+}
+.question_ans_results .ans{
+    color: gray;
+    
+}
+.question_ans_results .question{
+    font-weight: 600;
+    color: #5b5858;
+    
+}
+
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background:#58676f;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+}
+.loading, .m_loading{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    z-index: 100;
+}
+@keyframes lds-facebook {
+    0% {
+        top: 8px;
+        height: 64px;
+    }
+
+    50%,
+    100% {
+        top: 24px;
+        height: 32px;
+    }
+}
+.alert{
+    padding: .15rem 0.2rem !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .item-list span {
+     font-size: 16px;  }
+  
+  .tab-section .graph-section span.zoom-arrow i {
+    padding: 4px 5px;
+    font-size: 13px;
+  }
+  .tab-section .center {
+    padding-top: 0;
+   }
+   .tab-section h5 , .tab-section ul li, .tab-section h3, .heading {
+    text-align:center;
+   }
+   .tab-section .statistical-comparison ul {
+    padding-top: 14px;
+   }
+   .tab-section h5 {
+    padding-top: 25px;
+   }
+   .tab-section .result-box {
+    margin-bottom: 0px;
+   }
+   .tab-section td {
+    padding: 5px;
+   }
+   .tab-section .table thead th {
+        padding: 10px 6px;
+   }
+ 
+   .select-date-wrapper {
+      padding-bottom: 10px;
+      text-align: center;
+   }
+   .select-date-wrapper label {
+    float: none;
+   }
+   .select-date-wrapper .nice-select {
+    width: 100%;
+    margin-left: 0px;
+   }
+    .main-content {
+       padding-top: 160px;
+   }
+   .mobile-menu {
+     padding-top: 24px;
+   }
+   .tab-section {
+    padding: 0px;
+   }
+}
+

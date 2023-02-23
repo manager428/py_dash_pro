@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock stylesheet %}
+{% block content %}
+    {% include 'header.html' %}
+    <!--end header -->
+    <div class="container-fluid">
+        {% include 'patient/dashboard/include/sidebar.html' %}
+        {% block main_content %}
+        {% endblock main_content %}
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#patient_select').niceSelect();
+            $('#night_select').niceSelect();
+            $('#device_select').niceSelect();
+            $('#m_device_select').niceSelect();
+            $('#n_device_select').niceSelect();
+        });
+    </script>
+    <script>
+        const sleep_time_rec = JSON.parse({{sleep_time_rec|tojson}});
+
+        function myFunction(x) {
+            x.classList.toggle("menu-change");
+            jQuery('.exo-menu > li').toggleClass('display');
+        }
+
+        function openNav() {
+            document.getElementById("vertical-menu-mob").style.width = "70%";
+        }
+
+        function openClose() {
+            document.getElementById("vertical-menu-mob").style.width = "0";
+        }
+
+        function toggleIcon(e) {
+            $(e.target)
+                .prev('.toggle_icon')
+                .toggleClass('fa fa-plus-circle fa fa-minus-circle');
+        }
+
+        $('.collapse').on('hidden.bs.collapse', toggleIcon);
+        $('.collapse').on('shown.bs.collapse', toggleIcon);
+    </script>
+    <script src="{{ url_for('static', filename='js/dashboard/base.js') }}"></script>
+{% endblock extra_js %}

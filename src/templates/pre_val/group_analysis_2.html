@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+<style>
+  .header {
+    padding: 0;
+  }
+
+  body {
+    background: #d2cdcd12;
+  }
+
+  .heading {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .line {
+    background: darkgray;
+    height: 2.5px;
+  }
+
+  .select-date-wrapper {
+    width: 100%;
+    
+  }
+  .select-date-wrapper-small{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .small_size_table table {
+    font-size: 13px;
+  }
+
+  .small_size_table table td,
+  .small_size_table table th {
+    padding: .2rem;
+  }
+  .fixed_height_table{
+    max-height: 150px;
+    overflow-y: scroll;
+  }
+  .individual_statics_table thead th {
+    max-width: 30px;
+    word-break: break-word;
+    font-size: 12px;
+  }
+  .individual_details{
+    background: #dfe8f1;
+    padding: 7px;
+    border-radius: 10px;
+    margin-right: 50px;
+  }
+  .small_text{
+    font-size:13px;
+  }
+  .title-main{
+    font-size:14px;
+  }
+  .question_ans_results{
+    max-height: 100px;
+    overflow-y: scroll;
+  }
+  .toggle_icon {
+    top: 1px !important;
+    font-size: 15px !important;
+    right: -15px !important;
+  }
+  .individual_chart_heading{ 
+    left: 20px; 
+    font-size: 16px;
+  }
+  #apple_issue p, #fitbit_issue p{
+    display: inline-block;
+    font-size:16px;
+    margin: 0;
+    color: gray;
+    margin-left: 30px;
+  }
+  .smallbox:before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 7px;
+}
+.algo_bed:before {
+  background-color: #9ec0e5;
+}
+.algo_sleep:before{
+  background-color: #5090d4;
+}
+.sleep_bed:before{
+  background-color: #b2bcbe;
+}
+.sleep_sleep:before{
+  background-color:#818686;
+}
+.chart_lables{
+  font-size: 12px;
+}
+
+</style>
+{% endblock stylesheet %}
+{% block content %}
+{% include 'header.html' %}
+<div  style="padding-top: 80px;" class=" content-section container-fluid">
+  <div class="row">
+    <div class="tab_links col-md-5 p-0 ml-auto">
+      <ul class=" nav ml-4 mr-4 justify-content-around">
+        <li > <a class="btn p-0 small_text" href="/pre_val">Sleep Staging Analysis</a> </li>
+        <li> <a class="btn  p-0 small_text disabled" href="/pre_val?tab=2">Sleep Diary Analysis</a> </li>
+        <li> <a class="btn  p-0 small_text " href="/pre_val?tab=3">Discrepancy Analysis</a> </li>
+        <li> <a class="btn  p-0 small_text " href="/pre_val?tab=4">MSLT</a> </li>
+      </ul> 
+    </div>
+  </div>
+  <div style="display: none;" class="lds-facebook loading"><div></div><div></div><div></div></div>
+    <div class="row">
+      <div style="display: none;" class="col-md-7 m-auto text-center err_block err_group">
+        <div class="alert alert-danger" role="alert">
+          Error while fetching group data !
+          </div>
+      </div>
+      <div style="display: none;" class="col-md-7  m-auto text-center err_block err_individual">
+        <div class="alert alert-danger" role="alert">
+          Error while fetching individual data !
+          </div>
+      </div>	
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-3 heading">Group Analysis  <span style="font-size: 13px">( {{total_patients}} Results )</span>  </div>
+        <div class="col-md-7 line"></div>
+        <div class="col-md-2">
+          <button id = 'print_page' class="btn btn-info" style="width: 60%;background-color: #cfcfcf;padding:0.1rem">Print</button>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-2">Filter :</div>
+        <div class="col-md-2">
+          <select class='select-date-wrapper nice_select' id="device_select" >
+            <option value="0"> Select Device </option>
+            <option value= "Apple" >Apple</option>
+            <option value= "fitbit" >FitBit</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class='select-date-wrapper nice_select' id="cohort_select" >
+            <option value="0"> Select Cohort </option>
+            {% for cohort in cohort_options %}
+              <option value= "{{cohort}}">{{cohort}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class='select-date-wrapper nice_select' id="age_select" >
+            <option value="0">Select Age </option>
+            <option value= "0-15" >0-15</option>
+            <option value= "16-30" >16-30</option>
+            <option value= "31-45" >31-45</option>
+            <option value= "46-70" >46-70</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class='select-date-wrapper nice_select' id="gender_select">
+            <option value="0"> Select Gender </option>
+            <option value= "M" >Male</option>
+            <option value= "F" >Female</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button id = 'filter_grp_data' class="btn btn-info" style="width: 60%;">Filter</button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 small_size_table">
+          <div class="col-md-12">
+            <h6 class=" mt-1 mb-1 table_heading">Statics </h6>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+              <th scope="col">User</th>
+              <th scope="col">BedTime Diff</th>
+              <th scope="col">Sleep Onset Diff</th>
+              <th scope="col">Sleep Offset Diff</th>
+              <th scope="col">OutOfBedTime Diff</th>
+              </tr>
+            </thead>
+            
+            <tbody id="statics_table_group_body">
+              
+            </tbody>
+          </table>
+            
+        </div>
+        
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-2 heading">Individual Analysis</div>
+        <div class="col-md-9 line"></div>
+        
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-3">
+        <select class='select-date-wrapper-small nice_select' id='user_select'>
+          <option   value="0">Select User</option>
+          {% for user in user_options %}
+              <option value= "{{user}}">{{user}}</option>
+          {% endfor %}
+        </select>
+        <div>
+          <label   class="m-0 small" for="">Select Date :</label> 
+          <input style="padding: 0.15rem;font-size: 14px;" class="form-control" type="text" autocomplete="off" id="date_select_tab_2">
+        </div>
+        <div class="chart_lables p-1">
+           <div class="row">
+             <div class="col-12">
+               <div class="smallbox sleep_bed">Sleep Log : Bedtime to out-of-bed-time</div>
+               <div class="smallbox sleep_sleep">Sleep Log : Sleep onset to offset</div>
+               <div class="smallbox algo_bed">Algorithm :  Bedtime to out-of-bed-time</div>
+               <div class="smallbox algo_sleep">Algorithm : Sleep onset to offset</div>
+             </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row individual_details">
+          <div class="col-md-3">
+            <ul class="small_text">
+              <li><span>Patient ID:</span> <span id="patient_id">.....</span></li>
+              <li><span>DOB :</span> <span id="patient_dob">.....</span> </li>
+              <li><span>Gender:</span> <span id="patient_g">.....</span></li>
+              <li><span>BMI:</span> 19.2</li>
+            </ul>
+          </div>
+          <div class="col-md-2 daily-habits">
+            <h2 class="title-main">SLEEP HISTORY</h2>
+            <ul class="small_text">
+              <li><span style="font-size:13px">Referring Physician:</span> </li>
+              <li><span style="font-size:13px">Chief Complaint:</span> </li>
+              <li><span style="font-size:13px">Previous Evaluation:</span> </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+    
+            <div class="family-history">
+              <h2 class="title-main">Berlin Questionnaire for Sleep Apnea</h2>
+              <i class="toggle_icon fa fa-plus-circle" data-toggle="collapse" href="#pre_val_1_sleep_apnea_test" role="icon"
+                aria-expanded="false" aria-controls="multiCollapseExample1"></i>
+    
+              <div class="collapse multi-collapse pre_val_1_sleep_apnea_test" id="pre_val_1_sleep_apnea_test">
+                <div class="card-item">
+                  <ul class="question_ans_results small_text">
+                  </ul>
+                </div>
+              </div>
+              <div class="collapse multi-collapse" id="pre_val_1_sleep_apnea_test">
+              </div>
+            </div>
+            <div class="sleep-hitory">
+              <h2 class="title-main">Insomnia Severity Index</h2>
+              <i class="toggle_icon fa fa-plus-circle" data-toggle="collapse" href="#pre_val_1_insomnia_test" role="icon"
+                aria-expanded="false" aria-controls="multiCollapseExample2"></i>
+    
+              <div class="collapse multi-collapse pre_val_1_insomnia_test" id="pre_val_1_insomnia_test">
+                <div class="card-item">
+                  <ul class="question_ans_results small_text">
+                  </ul>
+                </div>
+              </div>
+              <div class="collapse multi-collapse" id="pre_val_1_insomnia_test">
+              </div>
+            </div>
+    
+          </div>
+    
+          <div class="col-md-3">
+    
+            <div class="sleep-hitory">
+              <h2 class="title-main">Epworth Sleepiness Scale</h2>
+              <i class="toggle_icon fa fa-plus-circle" data-toggle="collapse" href="#pre_val_1_eds_test" role="icon"
+                aria-expanded="false" aria-controls="multiCollapseExample2"></i>
+    
+              <div class="collapse multi-collapse pre_val_1_eds_test" id="pre_val_1_eds_test">
+                <div class="card-item">
+                  <ul class="question_ans_results small_text">
+                  </ul>
+                </div>
+              </div>
+              <div class="collapse multi-collapse" id="pre_val_1_eds_test">
+              </div>
+            </div>
+    
+            <div class="sleep-hitory">
+              <h2 class="title-main"> Reduced Morningness–Eveningness Questionnaire</h2>
+              <i class="toggle_icon fa fa-plus-circle" data-toggle="collapse" href="#pre_val_1_rme_test" role="icon"
+                aria-expanded="false" aria-controls="multiCollapseExample2"></i>
+    
+              <div class="collapse multi-collapse pre_val_1_rme_test" id="pre_val_1_rme_test">
+                <div class="card-item">
+                  <ul class="question_ans_results small_text">
+                  </ul>
+                </div>
+              </div>
+              <div class="collapse multi-collapse" id="pre_val_1_rme_test">
+              </div>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="group_data">
+      <div class="row">
+        <div class="col-md-5 small_size_table">
+          <div class="col-md-12">
+            <h6 class=" mt-1 mb-1 ">Apple Statics</h6>
+          </div>
+          <table class="table table-striped" id="ind_apple_statics_table">
+            <thead>
+            </thead>
+            <tbody >
+            </tbody>
+        </table>
+        </div>
+        <div class="col-md-5 small_size_table">
+          <div class="col-md-12">
+            <h6 class=" mt-1 mb-1 ">FitBit Statics</h6>
+          </div>
+          <table class="table table-striped" id="ind_fitbit_statics_table">
+            <thead>
+            </thead>
+            <tbody >
+            </tbody>
+        </table>
+        </div>
+      </div>
+    <div class="row  pb-4">
+
+      
+
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="individual_chart_heading apple">Apple  <span id="apple_issue"> </span></div>
+            <div class="graph_area" id="apple_circadian_rhythms"></div>
+          </div>
+          <div class="col-md-6">
+            <div class="individual_chart_heading fitbit">Fitbit <span id="fitbit_issue"> </span></div>
+              <div class="graph_area" id="fitbit_circadian_rhythms"></div>
+          </div>
+      </div>
+      </div>
+
+      <div class="col-md-3 small_size_table">
+        <div class="col-md-12">
+          <h6 class=" mt-1 mb-1 ">Apple Statics</h6>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Dates</th>
+              <th scope="col">BedTime Diff</th>
+              <th scope="col">Sleep Onset Diff</th>
+              <th scope="col">Sleep Offset Diff</th>
+              <th scope="col">OutOfBedTime Diff</th>
+            </tr>
+          </thead>
+          
+          <tbody id="statics_table_apple_body">
+            
+          </tbody>
+        </table>
+        <div class="col-md-12">
+          <h6 class=" mt-1 mb-1 ">FitBit Statics</h6>
+        </div>
+        <table class="table table-striped individual_statics_table">
+          <thead>
+            <tr>
+              <th scope="col">Dates</th>
+              <th scope="col">BedTime Diff</th>
+              <th scope="col">Sleep Onset Diff</th>
+              <th scope="col">Sleep Offset Diff</th>
+              <th scope="col">OutOfBedTime Diff</th>
+            </tr>
+          </thead>
+          
+          <tbody id="statics_table_fitbit_body">
+            
+          </tbody>
+        </table>
+      </div>
+    
+
+      
+  
+    
+    
+    
+    </div>
+  </div>
+
+
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+const sleep_time_rec = JSON.parse({{sleep_time_rec|tojson}});
+const user_nights = JSON.parse({{user_nights|tojson}});
+$(document).ready(function () {
+  $('.nice_select').niceSelect();
+});
+</script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"></script>
+<script src="{{ url_for('static', filename='js/util_functions.js')}}"></script>
+<script src="{{ url_for('static', filename='js/pre_val2.js')}}"></script>
+
+
+
+{% endblock extra_js %}

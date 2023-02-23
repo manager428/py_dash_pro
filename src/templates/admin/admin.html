@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+<style>
+    body{
+        background-color: white;
+    }
+    .content-section{
+        padding-top:100px;
+    }
+    .page_header{
+    	padding: 10px;
+        color: #656565;
+    }
+    .users_table{
+    	font-size: 14px;
+    }
+    .users_table thead{
+    	color: #797676
+    }
+    .action_options{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 18px;
+    }
+    .action_options .update{
+    color: #e8b10c;
+    }
+    .action_options .delete{
+    color: red;
+    }
+</style>
+{% endblock stylesheet %}
+{% block content %}
+{% include 'header.html' %}
+    <div class=" content-section container-fluid">	
+    <div class="row">
+    	
+    	<div class="col-md-2">
+    		{% include 'admin/admin_sidebar.html' %}
+    	</div>
+    	<div class="col-md-10 main_content">
+
+            <div class="row">
+                {% for category, message in get_flashed_messages(with_categories=True) %}
+                    <div style="padding: 5px; font-size: 13px;" class="col-md-6 m-auto text-center alert alert-{{category}}"> {{ message }}</div>
+                {% endfor %}
+            </div>
+    		
+    		<div class="page_header"><h4>All Users</h4> </div>
+    		<table class="table users_table">
+            <thead>
+	          <tr>
+	           <th>User Name</th>
+	           <th>Email</th>
+	           <th>Birth Date</th>
+	           <th>Gender</th>
+	           <th>Actions</th>
+	        </thead>
+	        <tbody>
+	        	{% for user in users %}
+	            <tr>
+	             <td>{{user.preferred_username}}</td>
+	             <td>{{user.email}}</td>
+	             <td>{{user.birthdate}}</td>
+	             <td>{{user.gender}}</td>
+	             <td class="action_options">
+	             		<a href="{{url_for('admin_update_user', username=user.preferred_username)}}"> <i class="menu_icons update fa fa-edit"></i> </a>
+	             		<a href="javascript:;"> <i class="menu_icons delete  fa fa-trash"></i></a>
+	                </td>
+	            </tr>
+	            {% endfor %}
+	         </tbody>
+        </table>
+    	</div>
+
+    </div >	
+		
+
+	</div>	
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+	$(document).ready(function () {
+		$('#users').addClass('active');
+	});
+	
+</script>
+
+{% endblock extra_js %}
+

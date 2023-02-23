@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+
+<style>
+    .content-section{
+        padding-top:100px;
+    }
+    #count{
+        margin-left: 25px;
+        color: gray;
+        font-size: 20px;
+    }
+</style>
+
+{% endblock stylesheet %}
+{% block content %}
+{% include 'header.html' %}
+    <div class=" content-section container-fluid">	
+    <div class="row">
+    	
+    	<div class="col-md-2">
+    		{% include 'admin/admin_sidebar.html' %}
+    	</div>
+    	<div class="col-md-10 main_content">
+            <div class="row text-center">
+                <div class="col-md-8  mb-3">
+                    <h4>
+                        {{file_name}}   <span id='count'>({{count}})</span> 
+                     </h4>
+                </div>
+                 
+            </div>
+            {{contents}}        
+    	</div>
+
+    </div >	
+		
+
+	</div>	
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+	$(document).ready(function () {
+		$('#s3_files').addClass('active');
+	});
+    
+	
+</script>
+
+{% endblock extra_js %}
+

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+
+<style>
+    .content-section{
+        padding-top:100px;
+    }
+    .breadcrumb a{
+        text-decoration: none;
+    }
+    .breadcrumb i{
+        margin-right: 5px;
+    }
+    .breadcrumb li:last-child a{
+        color: gray;
+        cursor: default;
+    }
+    .folder_list{
+        list-style: none;
+        color: #1a1aad;
+        font-size: 13px;
+    }
+    .file_list{
+        list-style: none;
+        font-size: 20px; 
+    }
+    .s3_folders{
+        cursor: pointer;
+    }
+    .list_headers{
+        color: gray;
+        border-bottom: 1px dashed gray;
+        width: 400px;
+        padding-bottom: 10px;
+    }
+    .view_links{
+        font-size: 16px;
+        margin-left: 40px;
+    }
+    .view_links i{
+        font-size: 14px;
+    }
+</style>
+
+{% endblock stylesheet %}
+{% block content %}
+{% include 'header.html' %}
+    <div class=" content-section container-fluid">	
+    <div class="row">
+    	
+    	<div class="col-md-2">
+    		{% include 'admin/admin_sidebar.html' %}
+    	</div>
+    	<div class="col-md-10 main_content">
+            <div class="row">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        {% for link in link_list %}
+                        <li class='breadcrumb-item ' >
+                            <a href="{{url_for('admin_s3_files' ,  after=[link.link] )}}"><i class="fa fa-folder-open-o"></i>{{link.label}}</a>
+                        </li>
+                        {% endfor %}
+                      
+                    </ol>
+                  </nav>
+            </div>
+            <div class="folders">
+                {%  if folders %}
+                <h4 class="list_headers">Folders</h4>
+                    <ul class="folder_list">
+                        {% for folder in folders %}
+                            <li class='s3_folders' id='{{folder}}'><i class="fa fa-folder-open-o"></i> {{folder}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                
+            </div>
+
+            <div class="files">
+                {%  if files %}
+                <h4 class="list_headers">Files</h4>
+                    <ul class="file_list">
+                        {% for file in files %}
+                            <li class='s3_files' id='{{file.Key}}'>
+                                <i class="fa fa-file"></i> {{file.Key.split('/')[-1]}} 
+                                <span class='view_links'> 
+                                    <a href="{{url_for('admin_s3_view_file' ,  key=[file.Key] )}}"  target="_blank">View File <i class="fa fa-external-link"></i></a>
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}     
+                
+            </div>           
+            
+    	</div>
+
+    </div >	
+		
+
+	</div>	
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+	$(document).ready(function () {
+		$('#s3_files').addClass('active');
+        
+        $(".s3_folders").on("click", function(){
+
+            var url = new URL(window.location.href); 
+            var search_params = url.searchParams; 
+            var after =  search_params.get('after'); 
+            if (after){
+                search_params.set('after',this.id);
+            }
+            else{
+                search_params.set('after',this.id);
+            }
+            url.search = search_params.toString();
+            var new_url = url.toString();
+            console.log(new_url)
+            window.location.href = new_url; 
+          
+        })  
+
+	});
+    
+	
+</script>
+
+{% endblock extra_js %}
+

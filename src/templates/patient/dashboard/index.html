@@ -1,0 +1,34 @@
+{% extends "patient/base.html" %}
+{% block main_content %}
+    <div class="main-content">
+        <div class="page-content">
+            <section class="tab-section">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <nav>
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-one-night"
+                                   role="tab" aria-controls="nav-home" aria-selected="true">One Night Study</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-multi-night"
+                                   role="tab" aria-controls="nav-profile" aria-selected="false">Multi Night Study</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-narcolepsy"
+                                   role="tab" aria-controls="nav-profile" aria-selected="false">Narcolepsy</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content py-4 px-4 px-sm-4" id="nav-tabContent">
+                            {% include 'patient/dashboard/include/one-night-study.html' %}
+                            {% include 'patient/dashboard/include/multi-night-study.html' %}
+                            {% include 'patient/dashboard/include/narcolepsy.html' %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock main_content %}
+{% block extra_js %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/dashboard/one-night-study.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard/multi-night-study.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard/narcolepsy.js') }}"></script>
+{% endblock extra_js %}

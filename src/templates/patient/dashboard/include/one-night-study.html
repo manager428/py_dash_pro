@@ -1,0 +1,276 @@
+<div class="tab-pane fade show active" id="nav-one-night" role="tabpanel"
+     aria-labelledby="nav-one-night-tab">
+    <div style="display: none;" class="lds-facebook loading">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="row">
+        <div style="display: none;"
+             class="col-md-7 m-auto text-center err_block err_night_option">
+            <div class="alert alert-danger" role="alert">
+                Error while fetching night options !
+            </div>
+        </div>
+        <div style="display: none;"
+             class="col-md-7  m-auto text-center err_block err_patient_data">
+            <div class="alert alert-danger" role="alert">
+                Error while fetching patient data !
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="select-date-wrapper">
+                <label>Select a device :</label>
+                <select id="device_select">
+                    <option id='0' value="0">Select Device</option>
+                    <option id='1' value="a">Apple</option>
+                    <option id='2' value="f">Fitbit</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="select-date-wrapper">
+                <label>Select a date :</label>
+                <select id="night_select">
+                    <option id='0' value="0">Select Date</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row p-5 recording_details">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <img id="recording_device_image"
+                         src="{{ url_for('static', filename='images/watch.png') }}">
+                </div>
+                <div class="col-md-6">
+                    <div class="item-list">
+                        <span class="details_heading">Recording device:</span>
+                        <p id="recording_device"></p>
+                    </div>
+                    <div class="item-list">
+                        <span class="details_heading">Quality:</span>
+                        <p id="recording_quality"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="calander_date">
+                        <div id="recording_date">28</div>
+                        <div id="recording_month">Feb</div>
+                        <div id="recording_year">2020</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="item-list">
+                        <span class="details_heading">Start:</span>
+                        <p id="recording_start_date"></p>
+                    </div>
+                    <div class="item-list">
+                        <span class="details_heading">End:</span>
+                        <p id="recording_end_date"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="patient_result">
+        <div class="row col-md-12">
+            <div class="col-lg-12 col-md-12  col-sm-12 table-responsive">
+                <div class="col-md-12">
+                    <h3 class=" mt-3 mb-3 ">Summary of One Night Study</h3>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">RESULTS</th>
+                        <th scope="col">REFERENCE</th>
+                    </tr>
+                    </thead>
+                    <!-- will update with api data -->
+                    <tbody id="summary_table">
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-lg-6 col-md-6  col-sm-12">
+                <div class="col-md-12">
+                    <h2 class="heading mt-3">Sleep Stages</h2>
+                </div>
+                <div class="col-md-12">
+                    <div id="sleep_stages"></div>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="row graph-section">
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <h3 class="mt-3"> Hypnogram <span class="sub">(Sleep  Stages)</span>
+                    </h3>
+                    <div class="card-ghraph text-center">
+                        <div class="graph_area smaller_heigh_graph" id="hypnogram"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <h3 class="mt-3"> Probability of Sleep Stages </h3>
+                    <div class="card-ghraph text-center">
+                        <div class="graph_area smaller_heigh_graph" id="hypnodensity"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <h3 class="mt-3">  Awakening
+                    </h3>
+                    <div class="card-ghraph text-center">
+                        <div class="graph_area smaller_heigh_graph" id="awakening_graph"></div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <h3 class="mt-3"> Heart Rate <span class="sub">(bpm)</span>
+                    </h3>
+                    <div class="card-ghraph text-center">
+                        <div class="graph_area smaller_heigh_graph" id="hr_graph"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <h3 class="mt-3"> Heart Rate Variability
+                    </h3>
+                    <div class="card-ghraph text-center">
+                        <div class="graph_area smaller_heigh_graph" id="hrv_graph"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 my-3">
+                <div class="card px-3">
+                    <h3 class="mt-3"> Activity<span class="sub">(Counts)</span>
+                    </h3>
+                    <div class="card-ghraph text-center">
+                        <div class="graph_area smaller_heigh_graph"
+                             id="activity_graph"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>    <!--edn graph -->
+        <!-- <div class="row graph-section">
+            <div class="col-md-12">
+                <h2 class="heading mt-3 heading-border-top">RESULT ANALYSIS</h2>
+            </div>
+        </div>
+        <div class="row row py-3">
+            <div class="col-md-2">
+                <div class="center">
+                    <h3>Sleep Quality</h3>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 text-center">
+                    <h5>TST</h5>
+                    <div class=" tst result-box">
+                            <h4 class="red">6 hrs</h4>
+                            <p><span class="arrow"><i class="fa fa-arrow-down" aria-hidden="true"></i></span> Reference: 7 hrs</p>
+                    </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 text-center">
+                    <h5>SE</h5>
+                    <div class="efficiency result-box">
+                            <h4 class="red">84%</h4>
+                            <p><span class="arrow"><i class="fa fa-arrow-down" aria-hidden="true"></i></span> Reference: 85 %</p>
+                    </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 text-center">
+                    <h5>Sleep Latency</h5>
+                    <div class="sleep_lat result-box">
+                            <h4 class="green">15 min</h4>
+                            <p>Reference: 20 min</p>
+                    </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 text-center">
+                    <h5>Arousals per hour</h5>
+                    <div class="result-box">
+                            <h4 class="red">6</h4>
+                            <p><span class="arrow"><i class="fa fa-arrow-down" aria-hidden="true"></i></span> Reference: 1</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row py-3">
+            <div class="col-md-2">
+                <div class="center">
+                    <h3>Sleep Disorders</h3>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 text-center">
+                    <h5>REM Latency</h5>
+                    <div class="rem_lat result-box">
+                            <h4 class="green">10 min</h4>
+                            <p> Reference: 15 min</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>  -->
+    </div>
+
+    <!-- <div class="row statistical-comparison pt-3">
+        <div class="col-md-12 py-3">
+         <h5>Statistical comparison</h5>
+        </div>
+        <div class="col-lg-2 col-sm-4">
+            <div class="center">
+                <ul>
+                    <li><span>Gender :</span> Female</li>
+                    <li><span>Age :</span> 30 - 40 years</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-8 col-sm-8">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 text-center">
+                   <h5>TST</h5>
+                   <img src="images/tab-1-graph-8.png" class="img-fluid">
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                   <h5>SE</h5>
+                   <img src="images/tab-1-graph-9.png" class="img-fluid">
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                   <h5>Sleep Latency</h5>
+                   <img src="images/tab-1-graph-10.png" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 patinets-details">
+             <ul>
+                <li><span>Number of patinets :</span> </li>
+                <li><span>Mean :</span> </li>
+                <li><span>Median :</span> </li>
+                <li><span>SD : 	</span> </li>
+            </ul>
+        </div>
+    </div> 	                                                 -->
+</div>

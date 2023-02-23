@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <style>
+        body {
+            background-color: white;
+        }
+
+        .login__form {
+            padding-top: 100px;
+        }
+
+        .terms_row {
+            display: flex;
+            justify-content: space-between;
+            width: 110%;
+        }
+    </style>
+{% endblock stylesheet %}
+{% block content %}
+    {% include 'header.html' %}
+    <div class="content-section">
+        <div class="login__form">
+            <div class="row m-auto col-md-6">
+                <p id='session_exp' style="color: red; display: none;">Session Expired !</p>
+            </div>
+            <div class="row">
+                {% for category, message in get_flashed_messages(with_categories=True) %}
+                    <div style="padding: 5px; font-size: 13px;"
+                         class="col-md-6 m-auto text-center alert alert-{{ category }}"> {{ message }}</div>
+                {% endfor %}
+            </div>
+            <div class="row m-auto col-md-6">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">User Log In</legend>
+                        <div class="form-group">
+                            {{ form.email.label(class="form-control-label") }}
+                            {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email(class="form-control form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.password.label(class="form-control-label") }}
+                            {% if form.password.errors %}
+                                {{ form.password(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="form-control form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-check">
+                            {{ form.remember(class="form-check-input") }}
+                            {{ form.remember.label(class="form-check-label") }}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                        <small class="text-muted ml-2">
+                            <a href="{{ url_for('forget_password') }}">Forgot Password?</a>
+                        </small>
+                    </div>
+                    <div class="terms_row">
+                        <small class="text-muted">
+                            <a href="{{ url_for('terms_of_use') }}">Terms of Use</a>
+                        </small>
+                        <small class="text-muted">
+                            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+                        </small>
+                        <small class="text-muted">
+                            <a href="{{ url_for('support') }}">Support</a>
+                        </small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+    <script>
+        $(document).ready(function () {
+            var session_exp = localStorage.getItem("SESSION_EXP");
+            if (session_exp) {
+                localStorage.removeItem("SESSION_EXP");
+                $("#session_exp").show();
+                setTimeout(function () {
+                    $("#session_exp").hide();
+                }, 5000);
+            }
+
+        });
+
+    </script>
+{% endblock extra_js %}

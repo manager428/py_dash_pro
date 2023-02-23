@@ -1,0 +1,21 @@
+prediction:
+  window: 21, 51, 101
+  num_class_choice: 3
+classifier_choice:
+  - lstm:
+      enabled: true
+  - blstm:
+      enabled: false
+  - one_d_cnn:
+      enabled: true
+  - wavenet:
+      enabled: false
+feature_choice:
+  - heart_rate:
+      enabled: true
+  - activity_count:
+      enabled: true
+models_path: tmp
+model_version: models/v6
+s3_processed_bucket: s3://cerno-processed
+app_env: dev
